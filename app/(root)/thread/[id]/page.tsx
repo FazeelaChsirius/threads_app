@@ -1,4 +1,3 @@
-'use server'
 import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
 
@@ -8,7 +7,7 @@ import ThreadCard from "@/components/cards/ThreadCard";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
 
-const revalidate = 0;
+export const revalidate = 0;
 
 async function page({ params }: { params: { id: string } }) {
   if (!params.id) return null;
@@ -25,7 +24,7 @@ async function page({ params }: { params: { id: string } }) {
     <section className='relative'>
       <div>
         <ThreadCard
-          id={thread._id}
+          id={thread?._id}
           currentUserId={user.id}
           parentId={thread.parentId}
           content={thread.text}

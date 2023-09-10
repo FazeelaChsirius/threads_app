@@ -1,5 +1,4 @@
 "use server";
-
 import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 
@@ -32,12 +31,19 @@ interface Params {
 }
 
 export async function updateUser({
+  // userId: string,
+  // bio: string,
+  // name: string,
+  // path: string,
+  // username: string,
+  // image: string
   userId,
   bio,
   name,
   path,
   username,
   image,
+
 }: Params): Promise<void> {
   try {
     connectToDB();

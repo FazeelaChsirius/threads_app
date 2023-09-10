@@ -39,7 +39,8 @@ interface Props {
 }
 
 async function ThreadsTab({ currentUserId, accountId, accountType }: Props) {
-  let result: Result;
+  // let result: Result;
+  let result: any;
 
   if (accountType === 'Communit') {
     result = await fetchCommunityPosts(accountId);

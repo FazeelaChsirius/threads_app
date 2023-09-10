@@ -1,27 +1,27 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-import { fetchUser } from '@/lib/actions/user.actions';
+import { fetchUser } from "@/lib/actions/user.actions";
 import AccountProfile from "@/components/forms/AccountProfile";
 
-
 async function Page() {
+
   const user = await currentUser();
   if(!user) return null;
-  // console.log(user, 'user');
 
-  const userInfo: any = await fetchUser(user.id);   // here we add type 'any' to solve error
+  const userInfo = await fetchUser(user.id); 
   if(userInfo?.onboarded) redirect('/');
 
-  // console.log(userInfo, 'userinfo');
+  // console.log(userInfo?.username, 'userinfo');
+  // console.log(user?.username, 'user');
 
   const userData = {
-    id: user.id,         // id of current login user
-    objectId: userInfo?._id,   // This is comming from database
-    username: userInfo ? userInfo?.username : user.username,
-    name: userInfo ? userInfo?.name : user.firstName ?? "",
+    id: user?.id,       
+    objectId: userInfo?._id,   
+    username: userInfo ? userInfo?.username : user?.username,
+    name: userInfo ? userInfo?.name : user?.firstName || "",
     bio: userInfo ? userInfo?.bio : "",
-    image: userInfo ? userInfo?.image : user.imageUrl,
+    image: userInfo ? userInfo?.image : user?.imageUrl,
   };
 
   return (
